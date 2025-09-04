@@ -20,12 +20,18 @@ class Produit(models.Model):
 
 class Rayon(models.Model):
     idRayon = models.AutoField(primary_key=True)
-    nomRayon = models.CharField(max_lenght=200)
+    nomRayon = models.CharField(max_length=200)
 
     def __str__(self):
         return self.nomRayon
 
 class Contenir(models.Model):
-    rayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, primary_key=True)
-    produit = models.ForeignKey(Produit, on_delete=models.CASCADE, primary_key=True)
+    rayon = models.ForeignKey(Rayon, on_delete=models.CASCADE)
+    produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
     Qte = models.PositiveSmallIntegerField()
+    
+    class Meta:
+        unique_together = ('rayon', 'produit')
+    
+    def __str__(self):
+        return f"{self.produit} dans {self.rayon} (Qte: {self.Qte})"
