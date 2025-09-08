@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Produit
 
 def home(request, param):
     return HttpResponse("<h1>Bonjour "+param+" !!!</h1>")
@@ -12,5 +13,21 @@ def about_us(request):
 
 def contact_us(request):
     return HttpResponse("<h1>Contact Us</h1>")
+
+def list_produits(request):
+    prdts = Produit.objects.all()
+    produit_html = ""
+    for prdt in prdts:
+        produit_html+=f"<li>{prdt.intituleProd}</li>\n"
+
+    html= f"""
+    <h1> Produits </h1>
+    <ul> 
+        {produit_html}
+    </ul>
+    """
+
+    return HttpResponse(html)
+
 
 # Create your views here.
