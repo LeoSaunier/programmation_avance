@@ -2,7 +2,9 @@ from django.contrib import admin
 from .models import Produit, Categorie, Statut, Rayon, Contenir
 
 class ProduitAdmin(admin.ModelAdmin):
-    list_display = ('intituleProd','prixUnitaireProd')
+    model = Produit
+    list_display = ["refProd", "intituleProd", "prixUnitaireProd", "date_fabrication", "categorie", "statut"]
+    list_editable = ["intituleProd", "prixUnitaireProd", "date_fabrication"]
 
 class ProduitInline(admin.TabularInline):
     model = Produit
