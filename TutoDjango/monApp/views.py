@@ -1,12 +1,14 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from .models import Produit, Statut, Categorie
 
-def home(request, param):
-    return HttpResponse("<h1>Bonjour "+param+" !!!</h1>")
+def accueil(request,param):
+    return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
 
 def home_sans_param(request):
-    return HttpResponse("<h1>Bonjour !!!</h1>")
+    if request.GET and request.GET["test"]:
+        raise Http404
+    return HttpResponse("Bonjour Monde!")
 
 def about_us(request):
     return HttpResponse("<h1>About Us</h1>")
