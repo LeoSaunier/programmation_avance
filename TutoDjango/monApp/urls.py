@@ -9,4 +9,5 @@ path("contactus", views.contact_us, name="contactus"),
 path("produits", views.ListProduits, name="produits"),
 path("categories", views.list_categories, name="categories"),
 path("statuts", views.list_statuts, name="statuts"),
+path("rayons", views.list_rayons, name="rayons"),
 ]

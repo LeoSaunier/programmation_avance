@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
-from .models import Produit, Statut, Categorie
+from .models import Produit, Statut, Categorie, Rayon
 
 def accueil(request,param):
     return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
@@ -30,5 +30,7 @@ def list_categories(request):
     return render(request, 'monApp/list_categories.html', {'ctgrs': ctgrs})
 
 
-
+def list_rayons(request):
+    rayons = Rayon.objects.all()
+    return render(request, 'monApp/list_rayons.html', {'rayons': rayons})
 # Create your views here.
