@@ -18,7 +18,7 @@ def contact_us(request):
 
 def ListProduits(request):
     prdts = Produit.objects.all()
-    return render(request, 'monApp/list_produits.html', {'premier_produit': prdts[0]})
+    return render(request, 'monApp/list_produits.html', {'prdts': prdts})
 
 def list_statuts(request):
     statuts = Statut.objects.all()
