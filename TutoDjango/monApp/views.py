@@ -16,20 +16,9 @@ def about_us(request):
 def contact_us(request):
     return HttpResponse("<h1>Contact Us</h1>")
 
-def list_produits(request):
+def ListProduits(request):
     prdts = Produit.objects.all()
-    produit_html = ""
-    for prdt in prdts:
-        produit_html+=f"<li>{prdt.intituleProd}</li>\n"
-
-    html= f"""
-    <h1> Produits </h1>
-    <ul> 
-        {produit_html}
-    </ul>
-    """
-
-    return HttpResponse(html)
+    return render(request, 'monApp/list_produits.html', {'premier_produit': prdts[0]})
 
 def list_statuts(request):
     statuts = Statut.objects.all()

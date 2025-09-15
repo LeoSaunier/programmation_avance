@@ -38,7 +38,6 @@ class ProduitAdmin(admin.ModelAdmin):
 
     def prixTTCProd(self, instance):
         return (instance.prixUnitaireProd * Decimal('1.20')).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-        prixTTCProd.short_description = "Prix TTC"
     prixTTCProd.short_description = "Prix TTC"
 
 class ProduitInline(admin.TabularInline):
