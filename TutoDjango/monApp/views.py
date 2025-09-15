@@ -22,18 +22,7 @@ def ListProduits(request):
 
 def list_statuts(request):
     statuts = Statut.objects.all()
-    statut_html = ""
-    for s in statuts:
-        statut_html+=f"<li>{s.libelle}</li>\n"
-
-    html= f"""
-    <h1> Produits </h1>
-    <ul> 
-        {statut_html}
-    </ul>
-    """
-
-    return HttpResponse(html)
+    return render(request, 'monApp/list_statuts.html', {'stts': statuts})
 
 
 def list_categories(request):
