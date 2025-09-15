@@ -27,18 +27,7 @@ def list_statuts(request):
 
 def list_categories(request):
     ctgrs = Categorie.objects.all()
-    categorie_html = ""
-    for ctgr in ctgrs:
-        categorie_html+=f"<li>{ctgr.nomCat}</li>\n"
-
-    html= f"""
-    <h1> Produits </h1>
-    <ul> 
-        {categorie_html}
-    </ul>
-    """
-
-    return HttpResponse(html)
+    return render(request, 'monApp/list_categories.html', {'ctgrs': ctgrs})
 
 
 
