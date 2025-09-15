@@ -1,12 +1,22 @@
 {% extends 'monApp/base.html' %}
 
+{% block menu %}
+    <h1>Liste des statuts</h1>
+    {% endblock %}
 {% block contenu %}
-        <h1>Statut</h1>
         <p>Mes Statuts sont :</p>
-        <!-- TODO : liste des produits -->
-         <ul>
-            {% for stt in stts %}
-                <li>{{ stt.libelle | upper}}</li>
-            {% endfor %}
-        </ul>
+        <table class="table">
+        <thead>
+        <th>Id</th>
+        <th>Nom Statut</th>
+        </thead>
+        <tbody>
+        {% for stt in stts %}
+        <tr>
+        <td>{{ stt.idStatut }} </td>
+        <td>{{ stt.libelle }} </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

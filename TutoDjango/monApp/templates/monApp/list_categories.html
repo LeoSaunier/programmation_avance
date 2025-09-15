@@ -1,12 +1,22 @@
 {% extends 'monApp/base.html' %}
 
+{% block menu %}
+    <h1>Liste des Catégories</h1>
+    {% endblock %}
 {% block contenu %}
-        <h1>Catégorie</h1>
         <p>Mes Catégories sont :</p>
-        <!-- TODO : liste des produits -->
-         <ul>
-            {% for ctgr in ctgrs %}
-                <li>{{ ctgr.nomCat | upper}}</li>
-            {% endfor %}
-        </ul>
+        <table class="table">
+        <thead>
+        <th>Id</th>
+        <th>Nom Statut</th>
+        </thead>
+        <tbody>
+        {% for ctgr in ctgrs %}
+        <tr>
+        <td>{{ ctgr.idCat }} </td>
+        <td>{{ ctgr.nomCat }} </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
