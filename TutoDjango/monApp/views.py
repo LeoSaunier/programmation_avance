@@ -124,3 +124,21 @@ class StatutDetailView(DetailView):
         context = super(StatutDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Statut"
         return context
+
+class RayonListView(ListView):
+    model = Rayon
+    template_name = "monApp/list_rayons.html"
+    context_object_name = "rayons"
+    def get_context_data(self, **kwargs):
+        context = super(RayonListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "Liste de mes Rayons"
+        return context
+
+class RayonDetailView(DetailView):
+    model = Rayon
+    template_name = "monApp/detail_rayon.html"
+    context_object_name = "rayon"
+    def get_context_data(self, **kwargs):
+        context = super(RayonDetailView, self).get_context_data(**kwargs)
+        context['titremenu'] = "Détail de la Rayon"
+        return context
