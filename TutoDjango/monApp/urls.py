@@ -12,6 +12,6 @@ path("categories", views.list_categories, name="categories"),
 path("statuts", views.list_statuts, name="statuts"),
 path("rayons", views.list_rayons, name="rayons"),
 path("home/", views.HomeView.as_view()),
-path("produits/",views.ProduitListView.as_view()),
-path("produit/<pk>/",views.ProduitDetailView.as_view()),
+path("produits/",views.ProduitListView.as_view(),name="lst_prdts"),
+path("produit/<pk>/" ,views.ProduitDetailView.as_view(), name="dtl_prdt"),
 ]
