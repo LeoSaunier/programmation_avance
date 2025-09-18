@@ -4,19 +4,19 @@ from .models import Produit, Statut, Categorie, Rayon
 from django.views.generic import *
 
 
-def accueil(request,param):
-    return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
+##def accueil(request,param):
+##    return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
 
 ##def home_sans_param(request):
 ##    if request.GET and request.GET["test"]:
 ##        raise Http404
 ##    return HttpResponse("Bonjour Monde!")
 
-def about_us(request):
-    return render(request, 'monApp/about_us.html')
-
-def contact_us(request):
-    return render(request, 'monApp/contact_us.html')
+##def about_us(request):
+##    return render(request, 'monApp/about_us.html')
+##
+##def contact_us(request):
+##    return render(request, 'monApp/contact_us.html')
 
 def ListProduits(request):
     prdts = Produit.objects.all()
@@ -68,3 +68,14 @@ class ContactView(TemplateView):
         return context
     def post(self, request, **kwargs):
         return render(request, self.template_name)
+    
+class ProduitListView(ListView):
+    model = Produit
+    template_name = "monApp/list_produits.html"
+    context_object_name = "prdts"
+    def get_queryset(self ) :
+        return Produit.objects.order_by("prixUnitaireProd")
+    def get_context_data(self, **kwargs):
+        context = super(ProduitListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "Liste de mes produits"
+        return context
