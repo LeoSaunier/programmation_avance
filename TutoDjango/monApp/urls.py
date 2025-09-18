@@ -10,10 +10,10 @@ path("contactus", views.ContactView.as_view(), name="contactus"),
 ##path("produits", views.ListProduits, name="produits"),
 path("categories/", views.CategorieListView.as_view(), name="lst_ctgrs"),
 path("categorie/<pk>/", views.CategorieDetailView.as_view(), name="dtl_ctgr"),
-path("statuts", views.list_statuts, name="statuts"),
 path("rayons", views.list_rayons, name="rayons"),
 path("home/", views.HomeView.as_view()),
 path("produits/",views.ProduitListView.as_view(),name="lst_prdts"),
 path("produit/<pk>/" ,views.ProduitDetailView.as_view(), name="dtl_prdt"),
-
+path("statuts/", views.StatutListView.as_view(), name="lst_stts"),
+path("statut/<pk>/", views.StatutDetailView.as_view(), name="dtl_stt"),
 ]

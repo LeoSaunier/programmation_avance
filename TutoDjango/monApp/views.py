@@ -99,10 +99,28 @@ class CategorieListView(ListView):
         return context
 
 class CategorieDetailView(DetailView):
-    model = Produit
+    model = Categorie
     template_name = "monApp/detail_categorie.html"
     context_object_name = "ctgr"
     def get_context_data(self, **kwargs):
         context = super(CategorieDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Catégorie"
+        return context
+
+class StatutListView(ListView):
+    model = Statut
+    template_name = "monApp/list_statuts.html"
+    context_object_name = "stts"
+    def get_context_data(self, **kwargs):
+        context = super(StatutListView, self).get_context_data(**kwargs)
+        context['titremenu'] = "Liste de mes Statuts"
+        return context
+
+class StatutDetailView(DetailView):
+    model = Statut
+    template_name = "monApp/detail_statut.html"
+    context_object_name = "stt"
+    def get_context_data(self, **kwargs):
+        context = super(StatutDetailView, self).get_context_data(**kwargs)
+        context['titremenu'] = "Détail de la Statut"
         return context

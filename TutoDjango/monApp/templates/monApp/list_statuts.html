@@ -14,7 +14,7 @@
         {% for stt in stts %}
         <tr>
         <td>{{ stt.idStatut }} </td>
-        <td>{{ stt.libelle }} </td>
+        <td><a href="{% url 'dtl_stt' stt.idStatut %}">{{ stt.libelle }}</a> </td>
         </tr>
         {% endfor %}
         </tbody>
