@@ -8,10 +8,12 @@ path("home/<param>", views.HomeView.as_view(), name='accueil'),
 path("aboutus", views.AboutView.as_view(), name="aboutus"),
 path("contactus", views.ContactView.as_view(), name="contactus"),
 ##path("produits", views.ListProduits, name="produits"),
-path("categories", views.list_categories, name="categories"),
+path("categories/", views.CategorieListView.as_view(), name="lst_ctgrs"),
+path("categorie/<pk>/", views.CategorieDetailView.as_view(), name="dtl_ctgr"),
 path("statuts", views.list_statuts, name="statuts"),
 path("rayons", views.list_rayons, name="rayons"),
 path("home/", views.HomeView.as_view()),
 path("produits/",views.ProduitListView.as_view(),name="lst_prdts"),
 path("produit/<pk>/" ,views.ProduitDetailView.as_view(), name="dtl_prdt"),
+
 ]
