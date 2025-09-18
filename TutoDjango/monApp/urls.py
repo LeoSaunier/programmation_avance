@@ -13,4 +13,5 @@ path("statuts", views.list_statuts, name="statuts"),
 path("rayons", views.list_rayons, name="rayons"),
 path("home/", views.HomeView.as_view()),
 path("produits/",views.ProduitListView.as_view()),
+path("produit/<pk>/",views.ProduitDetailView.as_view()),
 ]
