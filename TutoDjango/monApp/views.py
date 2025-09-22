@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
+
+from monApp.forms import ContactUsForm
 from .models import Produit, Statut, Categorie, Rayon
 from django.views.generic import *
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 
@@ -180,3 +183,7 @@ class DisconnectView(TemplateView):
         logout(request)
         return render(request, self.template_name)
 
+def ContactView(request):
+    form = ContactUsForm()
+    titreh1 = "Contact us !"
+    return render(request, "monApp/page_home.html",{'titreh1':titreh1, 'form':form})
