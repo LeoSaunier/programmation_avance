@@ -17,4 +17,7 @@ path("statuts/", views.StatutListView.as_view(), name="lst_stts"),
 path("statut/<pk>/", views.StatutDetailView.as_view(), name="dtl_stt"),
 path("rayons/", views.RayonListView.as_view(), name="lst_rayons"),
 path("rayon/<pk>/", views.RayonDetailView.as_view(), name="dtl_rayon"),
+path('login/', views.ConnectView.as_view(), name='login'),
+path('register/', views.RegisterView.as_view(), name='register'),
+path('logout/', views.DisconnectView.as_view(), name='logout'),
 ]
