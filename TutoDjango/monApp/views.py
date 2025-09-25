@@ -8,7 +8,8 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
-
+from django.core.mail import send_mail
+from django.shortcuts import redirect
 
 ##def accueil(request,param):
 ##    return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
@@ -66,14 +67,14 @@ class AboutView(TemplateView):
     def post(self, request, **kwargs):
         return render(request, self.template_name)
 
-class ContactView(TemplateView):
-    template_name = "monApp/page_home.html"
-    def get_context_data(self, **kwargs):
-        context = super(ContactView, self).get_context_data(**kwargs)
-        context['titreh1'] = "Contact us..."
-        return context
-    def post(self, request, **kwargs):
-        return render(request, self.template_name)
+##class ContactView(TemplateView):
+##    template_name = "monApp/page_home.html"
+##    def get_context_data(self, **kwargs):
+##        context = super(ContactView, self).get_context_data(**kwargs)
+##        context['titreh1'] = "Contact us..."
+##        return context
+##    def post(self, request, **kwargs):
+##        return render(request, self.template_name)
     
 class ProduitListView(ListView):
     model = Produit
@@ -184,6 +185,20 @@ class DisconnectView(TemplateView):
         return render(request, self.template_name)
 
 def ContactView(request):
-    form = ContactUsForm()
     titreh1 = "Contact us !"
+    if request.method=='POST':
+        form = ContactUsForm(request.POST)
+        if form.is_valid():
+            send_mail(
+            subject=f'Message from {form.cleaned_data["name"] or "anonyme"} via TutoDjango Contact form',
+            message=form.cleaned_data['message'],
+            from_email=form.cleaned_data['email'],
+            recipient_list=['admin@monApp.com'],
+            )
+            return redirect('email-sent')
+    else:
+        form = ContactUsForm()
     return render(request, "monApp/page_home.html",{'titreh1':titreh1, 'form':form})
+
+def EmailSentView(request):
+    return render(request, "monApp/email_sent.html")
