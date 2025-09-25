@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 
-from monApp.forms import ContactUsForm
+from monApp.forms import *
 from .models import Produit, Statut, Categorie, Rayon
 from django.views.generic import *
 from django.contrib.auth.views import LoginView
@@ -202,3 +202,14 @@ def ContactView(request):
 
 def EmailSentView(request):
     return render(request, "monApp/email_sent.html")
+
+
+def ProduitCreate(request):
+    if request.method == 'POST':
+        form = ProduitForm(request.POST)
+        if form.is_valid():
+            prdt = form.save()
+            return redirect('dtl_prdt', prdt.refProd)
+    else:
+        form = ProduitForm()
+    return render(request, "monApp/create_produit.html", {'form': form})
