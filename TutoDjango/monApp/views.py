@@ -88,6 +88,7 @@ class ProduitListView(ListView):
         context['titremenu'] = "Liste de mes produits"
         return context
 
+
 class ProduitDetailView(DetailView):
     model = Produit
     template_name = "monApp/detail_produit.html"
@@ -96,6 +97,7 @@ class ProduitDetailView(DetailView):
         context = super(ProduitDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail du produit"
         return context
+
 
 class CategorieListView(ListView):
     model = Categorie
@@ -106,6 +108,7 @@ class CategorieListView(ListView):
         context['titremenu'] = "Liste de mes Catégories"
         return context
 
+
 class CategorieDetailView(DetailView):
     model = Categorie
     template_name = "monApp/detail_categorie.html"
@@ -114,6 +117,7 @@ class CategorieDetailView(DetailView):
         context = super(CategorieDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Catégorie"
         return context
+
 
 class StatutListView(ListView):
     model = Statut
@@ -124,6 +128,7 @@ class StatutListView(ListView):
         context['titremenu'] = "Liste de mes Statuts"
         return context
 
+
 class StatutDetailView(DetailView):
     model = Statut
     template_name = "monApp/detail_statut.html"
@@ -133,6 +138,7 @@ class StatutDetailView(DetailView):
         context['titremenu'] = "Détail de la Statut"
         return context
 
+
 class RayonListView(ListView):
     model = Rayon
     template_name = "monApp/list_rayons.html"
@@ -141,6 +147,7 @@ class RayonListView(ListView):
         context = super(RayonListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes Rayons"
         return context
+
 
 class RayonDetailView(DetailView):
     model = Rayon
@@ -185,6 +192,7 @@ class DisconnectView(TemplateView):
         logout(request)
         return render(request, self.template_name)
 
+
 def ContactView(request):
     titreh1 = "Contact us !"
     if request.method=='POST':
@@ -201,6 +209,7 @@ def ContactView(request):
         form = ContactUsForm()
     return render(request, "monApp/page_home.html",{'titreh1':titreh1, 'form':form})
 
+
 def EmailSentView(request):
     return render(request, "monApp/email_sent.html")
 
@@ -213,6 +222,7 @@ class ProduitCreateView(CreateView):
         prdt = form.save()
         return redirect('dtl_prdt', prdt.refProd)
     
+
 class ProduitUpdateView(UpdateView):
     model = Produit
     form_class=ProduitForm
@@ -220,3 +230,9 @@ class ProduitUpdateView(UpdateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         prdt = form.save()
         return redirect('dtl_prdt', prdt.refProd)
+
+
+class ProductDeleteView(DeleteView):
+    model = Produit
+    template_name = "monApp/delete_produit.html"
+    success_url = reverse_lazy('lst_prdts')
