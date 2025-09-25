@@ -8,5 +8,7 @@
 <li>Id Statut : {{stt.idStatut }} </li>
 <li>Nom Statut : {{ stt.libelle }} </li>
 <li><a href="{% url 'lst_stts' %}">Retour à la liste des statuts</a></li>
+<li><a href="{% url 'stt-chng' stt.idStatut %}">modifier</a></li>
+<li><a href="{% url 'dlt-stt' stt.idStatut %}">supprimer</a></li>
 </ul>
 {% endblock %}

@@ -25,4 +25,8 @@ path('email-sent/', views.EmailSentView, name='email-sent'),
 path("produit/",views.ProduitCreateView.as_view(), name="crt-prdt"),
 path("produit/<pk>/update/",views.ProduitUpdateView.as_view(), name="prdt-chng"),
 path("produit/<pk>/delete/",views.ProductDeleteView.as_view(), name="dlt-prdt"),
+
+path("statut/",views.StatutCreateView.as_view(), name="crt-stt"),
+path("statut/<pk>/update/",views.StatutUpdateView.as_view(), name="stt-chng"),
+path("statut/<pk>/delete/",views.StatutDeleteView.as_view(), name="dlt-stt"),
 ]
