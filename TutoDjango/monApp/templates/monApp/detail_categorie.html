@@ -8,5 +8,7 @@
 <li>Référence Catégorie : {{ctgr.idCat }} </li>
 <li>Nom Catégorie : {{ ctgr.nomCat }} </li>
 <li><a href="{% url 'lst_ctgrs' %}">Retour à la liste des categories</a></li>
+<li><a href="{% url 'ctgr-chng' ctgr.idCat %}">modifier</a></li>
+<li><a href="{% url 'dlt-ctgr' ctgr.idCat %}">supprimer</a></li>
 </ul>
 {% endblock %}

@@ -260,3 +260,27 @@ class StatutDeleteView(DeleteView):
     model = Statut
     template_name = "monApp/delete_statut.html"
     success_url = reverse_lazy('lst_stts')
+
+
+class CategorieCreateView(CreateView):
+    model = Categorie
+    form_class=CategorieForm
+    template_name = "monApp/create_categorie.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        ctrg = form.save()
+        return redirect('dtl_ctgr', ctrg.idCat)
+    
+
+class CategorieUpdateView(UpdateView):
+    model = Categorie
+    form_class=CategorieForm
+    template_name = "monApp/update_categorie.html"
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        ctrg = form.save()
+        return redirect('dtl_ctgr', ctrg.idCat)
+
+
+class CategorieDeleteView(DeleteView):
+    model = Categorie
+    template_name = "monApp/delete_categorie.html"
+    success_url = reverse_lazy('lst_ctgrs')
