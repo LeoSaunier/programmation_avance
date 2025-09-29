@@ -11,6 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.shortcuts import redirect
+from django.db.models import Count, Prefetch
 
 ##def accueil(request,param):
 ##    return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
@@ -103,6 +104,11 @@ class CategorieListView(ListView):
     model = Categorie
     template_name = "monApp/list_categories.html"
     context_object_name = "ctgrs"
+
+    def get_queryset(self):
+        # Annoter chaque catégorie avec le nombre de produits liés
+        return Categorie.objects.annotate(nb_produits=Count('produits'))
+
     def get_context_data(self, **kwargs):
         context = super(CategorieListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes Catégories"
@@ -113,6 +119,11 @@ class CategorieDetailView(DetailView):
     model = Categorie
     template_name = "monApp/detail_categorie.html"
     context_object_name = "ctgr"
+
+    def get_queryset(self):
+        # Annoter chaque catégorie avec le nombre de produits liés
+        return Categorie.objects.annotate(nb_produits=Count('produits'))
+
     def get_context_data(self, **kwargs):
         context = super(CategorieDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Catégorie"

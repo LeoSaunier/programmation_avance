@@ -9,13 +9,15 @@
         <thead>
         <th>Id</th>
         <th>Nom Statut</th>
+        <th>Nombre de Produits</th>
         </thead>
         <tbody>
         {% for ctgr in ctgrs %}
         <tr>
         <td>{{ ctgr.idCat }} </td>
         <td><a href="{% url 'dtl_ctgr' ctgr.idCat %}">{{ ctgr.nomCat }}</a> </td>
-        </tr>
+        <td>{{ ctgr.nb_produits }} </td>
+    </tr>
         {% endfor %}
         </tbody>
     </table>
