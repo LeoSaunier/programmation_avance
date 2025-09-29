@@ -35,8 +35,8 @@ class Rayon(models.Model):
         return self.nomRayon
 
 class Contenir(models.Model):
-    rayon = models.ForeignKey(Rayon, on_delete=models.CASCADE)
-    produit = models.ForeignKey(Produit, on_delete=models.CASCADE)
+    rayon = models.ForeignKey(Rayon, on_delete=models.CASCADE, related_name="contenir_rayon")
+    produit = models.ForeignKey(Produit, on_delete=models.CASCADE, related_name="contenir_produit")
     Qte = models.PositiveSmallIntegerField()
     
     class Meta:

@@ -127,6 +127,7 @@ class CategorieDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CategorieDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Catégorie"
+        context['prdts'] = self.object.produits.all()
         return context
 
 
@@ -157,6 +158,13 @@ class RayonListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(RayonListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes Rayons"
+        ryns_dt = []
+        for rayon in context['rayons']:
+            total = 0
+            for contenir in rayon.contenir_rayon.all():
+                total += contenir.produit.prixUnitaireProd * contenir.Qte
+            ryns_dt.append({'rayon': rayon,'total_stock': total})
+        context['ryns_dt'] = ryns_dt
         return context
 
 
@@ -167,6 +175,24 @@ class RayonDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(RayonDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Rayon"
+
+        prdts_dt = []
+        total_rayon = 0
+        total_nb_produit = 0
+        
+        for contenir in self.object.contenir_rayon.all():
+            total_produit = contenir.produit.prixUnitaireProd * contenir.Qte
+            prdts_dt.append({ 'produit': contenir.produit,
+                'qte': contenir.Qte,
+                'prix_unitaire': contenir.produit.prixUnitaireProd,
+                'total_produit': total_produit} )
+            total_rayon += total_produit
+            total_nb_produit += contenir.Qte
+
+        context['prdts_dt'] = prdts_dt
+        context['total_rayon'] = total_rayon
+        context['total_nb_produit'] = total_nb_produit
+
         return context
 
 
