@@ -8,5 +8,7 @@
 <li>Id Rayon : {{rayon.idRayon }} </li>
 <li>Nom Rayon : {{ rayon.nomRayon }} </li>
 <li><a href="{% url 'lst_rayons' %}">Retour à la liste des rayons</a></li>
+<li><a href="{% url 'rayon-chng' rayon.idRayon %}">modifier</a></li>
+<li><a href="{% url 'dlt-rayon' rayon.idRayon %}">supprimer</a></li>
 </ul>
 {% endblock %}

@@ -33,4 +33,8 @@ path("statut/<pk>/delete/",views.StatutDeleteView.as_view(), name="dlt-stt"),
 path("categorie/",views.CategorieCreateView.as_view(), name="crt-ctgr"),
 path("categorie/<pk>/update/",views.CategorieUpdateView.as_view(), name="ctgr-chng"),
 path("categorie/<pk>/delete/",views.CategorieDeleteView.as_view(), name="dlt-ctgr"),
+
+path("rayon/",views.RayonCreateView.as_view(), name="crt-rayon"),
+path("rayon/<pk>/update/",views.RayonUpdateView.as_view(), name="rayon-chng"),
+path("rayon/<pk>/delete/",views.RayonDeleteView.as_view(), name="dlt-rayon"),
 ]
