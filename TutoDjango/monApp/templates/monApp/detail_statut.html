@@ -7,8 +7,35 @@
 <ul>
 <li>Id Statut : {{stt.idStatut }} </li>
 <li>Nom Statut : {{ stt.libelle }} </li>
-<li><a href="{% url 'lst_stts' %}">Retour à la liste des statuts</a></li>
-<li><a href="{% url 'stt-chng' stt.idStatut %}">modifier</a></li>
-<li><a href="{% url 'dlt-stt' stt.idStatut %}">supprimer</a></li>
-</ul>
+
+<div class="car-footer text-center">
+<a href="{% url 'lst_stts' %}" class="btn btn-info mt-2">Retour</a>
+<a href="{% url 'stt-chng' stt.idStatut %}" class="btn btn-warning mt-2">modifier</a>
+<a href="{% url 'dlt-stt' stt.idStatut %}" class="btn btn-danger mt-2">supprimer</a>
+</div>
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h4>Ce Statut contient <strong>{{ stt.nb_produits }}</strong> produit(s)</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% if prdts %}
+            {% for prdt in prdts %}
+            <div class="col-sm-3">
+                <div class="card mb-2 text-center">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="card-title">{{ prdt.intituleProd }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'dtl_prdt' prdt.refProd %}" class="btn btn-primary mt-2">Détails</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-muted">Aucun produit trouvé pour ce statut.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}

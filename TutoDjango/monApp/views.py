@@ -82,8 +82,9 @@ class ProduitListView(ListView):
     model = Produit
     template_name = "monApp/list_produits.html"
     context_object_name = "prdts"
-    def get_queryset(self ) :
-        return Produit.objects.order_by("prixUnitaireProd")
+    def get_queryset(self):
+        # Charge les catégories et les statuts en même temps
+        return Produit.objects.select_related('categorie').select_related('status')
     def get_context_data(self, **kwargs):
         context = super(ProduitListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes produits"
@@ -135,6 +136,11 @@ class StatutListView(ListView):
     model = Statut
     template_name = "monApp/list_statuts.html"
     context_object_name = "stts"
+
+    def get_queryset(self):
+        # Annoter chaque statut avec le nombre de produits liés
+        return Statut.objects.annotate(nb_produits=Count('produits'))
+
     def get_context_data(self, **kwargs):
         context = super(StatutListView, self).get_context_data(**kwargs)
         context['titremenu'] = "Liste de mes Statuts"
@@ -145,9 +151,15 @@ class StatutDetailView(DetailView):
     model = Statut
     template_name = "monApp/detail_statut.html"
     context_object_name = "stt"
+
+    def get_queryset(self):
+        # Annoter chaque statut avec le nombre de produits liés
+        return Statut.objects.annotate(nb_produits=Count('produits'))
+
     def get_context_data(self, **kwargs):
         context = super(StatutDetailView, self).get_context_data(**kwargs)
         context['titremenu'] = "Détail de la Statut"
+        context['prdts'] = self.object.produits.all()
         return context
 
 

@@ -9,12 +9,14 @@
         <thead>
         <th>Id</th>
         <th>Nom Statut</th>
+        <th>Nombre de Produits</th>
         </thead>
         <tbody>
         {% for stt in stts %}
         <tr>
         <td>{{ stt.idStatut }} </td>
         <td><a href="{% url 'dtl_stt' stt.idStatut %}">{{ stt.libelle }}</a> </td>
+        <td>{{ stt.nb_produits }} </td>
         </tr>
         {% endfor %}
         </tbody>
