@@ -282,8 +282,9 @@ class ProduitCreateView(CreateView):
     def form_valid(self, form: BaseModelForm) -> HttpResponse:
         prdt = form.save()
         return redirect('dtl_prdt', prdt.refProd)
-    
 
+
+@method_decorator(login_required, name='dispatch')
 class ProduitUpdateView(UpdateView):
     model = Produit
     form_class=ProduitForm
@@ -293,12 +294,14 @@ class ProduitUpdateView(UpdateView):
         return redirect('dtl_prdt', prdt.refProd)
 
 
+@method_decorator(login_required, name='dispatch')
 class ProductDeleteView(DeleteView):
     model = Produit
     template_name = "monApp/delete_produit.html"
     success_url = reverse_lazy('lst_prdts')
 
 
+@method_decorator(login_required, name='dispatch')
 class StatutCreateView(CreateView):
     model = Statut
     form_class=StatutForm
@@ -308,6 +311,7 @@ class StatutCreateView(CreateView):
         return redirect('dtl_stt', stt.idStatut)
     
 
+@method_decorator(login_required, name='dispatch')
 class StatutUpdateView(UpdateView):
     model = Statut
     form_class=StatutForm
@@ -317,12 +321,14 @@ class StatutUpdateView(UpdateView):
         return redirect('dtl_stt', stt.idStatut)
 
 
+@method_decorator(login_required, name='dispatch')
 class StatutDeleteView(DeleteView):
     model = Statut
     template_name = "monApp/delete_statut.html"
     success_url = reverse_lazy('lst_stts')
 
 
+@method_decorator(login_required, name='dispatch')
 class CategorieCreateView(CreateView):
     model = Categorie
     form_class=CategorieForm
@@ -332,6 +338,7 @@ class CategorieCreateView(CreateView):
         return redirect('dtl_ctgr', ctrg.idCat)
     
 
+@method_decorator(login_required, name='dispatch')
 class CategorieUpdateView(UpdateView):
     model = Categorie
     form_class=CategorieForm
@@ -341,12 +348,14 @@ class CategorieUpdateView(UpdateView):
         return redirect('dtl_ctgr', ctrg.idCat)
 
 
+@method_decorator(login_required, name='dispatch')
 class CategorieDeleteView(DeleteView):
     model = Categorie
     template_name = "monApp/delete_categorie.html"
     success_url = reverse_lazy('lst_ctgrs')
 
 
+@method_decorator(login_required, name='dispatch')
 class RayonCreateView(CreateView):
     model = Rayon
     form_class=RayonForm
@@ -356,6 +365,7 @@ class RayonCreateView(CreateView):
         return redirect('dtl_rayon', rayon.idRayon)
     
 
+@method_decorator(login_required, name='dispatch')
 class RayonUpdateView(UpdateView):
     model = Rayon
     form_class=RayonForm
@@ -365,6 +375,7 @@ class RayonUpdateView(UpdateView):
         return redirect('dtl_rayon', rayon.idRayon)
 
 
+@method_decorator(login_required, name='dispatch')
 class RayonDeleteView(DeleteView):
     model = Rayon
     template_name = "monApp/delete_rayon.html"
