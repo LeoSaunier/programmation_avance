@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'monApp',
     'debug_toolbar',
     'bootstrap5',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,5 @@ INTERNAL_IPS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_URL = '/monApp/login/'

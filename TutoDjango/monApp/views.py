@@ -12,6 +12,9 @@ from django.urls import reverse_lazy
 from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.db.models import Count, Prefetch
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView
 
 ##def accueil(request,param):
 ##    return HttpResponse("<h1>Hello " + param + " ! You're connected</h1>")
@@ -84,7 +87,7 @@ class ProduitListView(ListView):
     context_object_name = "prdts"
     def get_queryset(self):
         # Charge les catégories et les statuts en même temps
-        return Produit.objects.select_related('categorie').select_related('status')
+        return Produit.objects.select_related('categorie').select_related('statut')
     
     def get_context_data(self, **kwargs):
         context = super(ProduitListView, self).get_context_data(**kwargs)
@@ -271,7 +274,7 @@ def ContactView(request):
 def EmailSentView(request):
     return render(request, "monApp/email_sent.html")
 
-
+@method_decorator(login_required, name='dispatch')
 class ProduitCreateView(CreateView):
     model = Produit
     form_class=ProduitForm
