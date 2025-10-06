@@ -403,3 +403,30 @@ class RayonDeleteView(DeleteView):
     model = Rayon
     template_name = "monApp/delete_rayon.html"
     success_url = reverse_lazy('lst_rayons')
+
+
+class ContenirCreateView(CreateView):
+    model = Contenir
+    form_class=ContenirForm
+    template_name = "monApp/create_contenir.html"
+
+    def get_context_data(self, **kwargs):
+        context= super(ContenirCreateView, self).get_context_data(**kwargs)
+        context["rayon"]= Rayon.objects.get(pk=self.kwargs["pk"])
+        return context
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        rayon = Rayon.objects.get(pk=self.kwargs["pk"])
+        produit = form.cleaned_data["produit"]
+        Qte = form.cleaned_data["Qte"]
+
+        
+        if Contenir.objects.filter(produit=produit, rayon=rayon).exists():
+            contenir = Contenir.objects.get(produit=produit, rayon=rayon)
+            contenir.Qte +=Qte
+        else:
+            contenir = Contenir.objects.create(rayon=rayon,produit=produit,Qte=Qte)
+        
+        contenir.save()
+
+        return redirect('dtl_rayon', self.kwargs["pk"] )

@@ -31,3 +31,8 @@ class CategorieForm(forms.ModelForm):
     class Meta:
         model = Categorie
         fields = '__all__'
+
+class ContenirForm(forms.ModelForm):
+    class Meta:
+        model = Contenir
+        fields = ['produit', 'Qte',]
