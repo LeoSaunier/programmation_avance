@@ -39,5 +39,6 @@ path("rayon/<pk>/update/",views.RayonUpdateView.as_view(), name="rayon-chng"),
 path("rayon/<pk>/delete/",views.RayonDeleteView.as_view(), name="dlt-rayon"),
 
 path('rayon/<pk>/cntnr', views.ContenirCreateView.as_view(), name='cntnr-crt'),
-path('rayon/<pk>/cntnr/<id>', views.ContenirUpdateView.as_view(), name='cntnr-chng'),
+path('rayon/<pk>/cntnr/<id>/update/', views.ContenirUpdateView.as_view(), name='cntnr-chng'),
+path('rayon/<pk>/cntnr/<id>/delete/', views.ContenirDeleteView.as_view(), name='dlt-cntnr'),
 ]

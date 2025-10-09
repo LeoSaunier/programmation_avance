@@ -463,3 +463,19 @@ class ContenirUpdateView(UpdateView):
 
         return redirect('dtl_rayon', self.kwargs["pk"])
     
+
+class ContenirDeleteView(DeleteView):
+    model = Contenir
+    template_name = "monApp/delete_contenir.html"
+
+    def get_context_data(self, **kwargs):
+        context =  super(ContenirDeleteView, self).get_context_data(**kwargs)
+        context["object"] = Contenir.objects.get(rayon=Rayon.objects.get(pk=self.kwargs["pk"]), produit=Produit.objects.get(pk=self.kwargs["id"]))
+        return context
+    
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        contenir = Contenir.objects.get(rayon=Rayon.objects.get(pk=self.kwargs["pk"]), produit=Produit.objects.get(pk=self.kwargs["id"])).delete()
+        return redirect('dtl_rayon', self.kwargs["pk"])
+
+
+    
