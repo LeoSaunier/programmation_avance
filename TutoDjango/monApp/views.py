@@ -429,4 +429,37 @@ class ContenirCreateView(CreateView):
         
         contenir.save()
 
-        return redirect('dtl_rayon', self.kwargs["pk"] )
+        return redirect('dtl_rayon', self.kwargs["pk"])
+    
+class ContenirUpdateView(UpdateView):
+    model = Contenir
+    form_class=ContenirForm
+    template_name = "monApp/update_contenir.html"
+
+    def get_context_data(self, **kwargs):
+        context= super(ContenirUpdateView, self).get_context_data(**kwargs)
+        context["rayon"]= Rayon.objects.get(pk=self.kwargs["pk"])
+        return context
+    
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # Désactiver le champ 'produit' uniquement ici
+        form.fields['produit'].disabled = True
+        return form
+
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        rayon = Rayon.objects.get(pk=self.kwargs["pk"])
+        produit = form.cleaned_data["produit"]
+        Qte = form.cleaned_data["Qte"]
+
+        
+        if Qte<=0:
+            contenir = Contenir.objects.get(produit=produit, rayon=rayon).delete()
+        else:
+            contenir = Contenir.objects.get(rayon=rayon,produit=produit)
+            contenir.Qte = Qte
+        
+        contenir.save()
+
+        return redirect('dtl_rayon', self.kwargs["pk"])
+    
