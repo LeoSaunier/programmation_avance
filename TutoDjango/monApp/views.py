@@ -404,7 +404,7 @@ class RayonDeleteView(DeleteView):
     template_name = "monApp/delete_rayon.html"
     success_url = reverse_lazy('lst_rayons')
 
-
+@method_decorator(login_required, name='dispatch')
 class ContenirCreateView(CreateView):
     model = Contenir
     form_class=ContenirForm
@@ -431,6 +431,8 @@ class ContenirCreateView(CreateView):
 
         return redirect('dtl_rayon', self.kwargs["pk"])
     
+
+@method_decorator(login_required, name='dispatch')
 class ContenirUpdateView(UpdateView):
     model = Contenir
     form_class=ContenirForm
@@ -464,6 +466,7 @@ class ContenirUpdateView(UpdateView):
         return redirect('dtl_rayon', self.kwargs["pk"])
     
 
+@method_decorator(login_required, name='dispatch')
 class ContenirDeleteView(DeleteView):
     model = Contenir
     template_name = "monApp/delete_contenir.html"
