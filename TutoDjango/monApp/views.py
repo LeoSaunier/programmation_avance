@@ -30,23 +30,23 @@ from django.views.generic import TemplateView
 ##def contact_us(request):
 ##    return render(request, 'monApp/contact_us.html')
 
-def ListProduits(request):
-    prdts = Produit.objects.all()
-    return render(request, 'monApp/list_produits.html', {'prdts': prdts})
-
-def list_statuts(request):
-    statuts = Statut.objects.all()
-    return render(request, 'monApp/list_statuts.html', {'stts': statuts})
-
-
-def list_categories(request):
-    ctgrs = Categorie.objects.all()
-    return render(request, 'monApp/list_categories.html', {'ctgrs': ctgrs})
-
-
-def list_rayons(request):
-    rayons = Rayon.objects.all()
-    return render(request, 'monApp/list_rayons.html', {'rayons': rayons})
+##def ListProduits(request):
+##    prdts = Produit.objects.all()
+##    return render(request, 'monApp/list_produits.html', {'prdts': prdts})
+##
+##def list_statuts(request):
+##    statuts = Statut.objects.all()
+##    return render(request, 'monApp/list_statuts.html', {'stts': statuts})
+##
+##
+##def list_categories(request):
+##    ctgrs = Categorie.objects.all()
+##    return render(request, 'monApp/list_categories.html', {'ctgrs': ctgrs})
+##
+##
+##def list_rayons(request):
+##    rayons = Rayon.objects.all()
+##    return render(request, 'monApp/list_rayons.html', {'rayons': rayons})
 # Create your views here.
 
 class HomeView(TemplateView):
